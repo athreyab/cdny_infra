@@ -1,0 +1,53 @@
+name: Deploy Azure Infrastructure with Bicep
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  deploy:
+    strategy:
+      max-parallel: 1
+      matrix:
+        stage: [dev,qa]
+
+    runs-on: ubuntu-latest
+    environment: ${{ matrix.stage }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Login to Azure
+        shell: pwsh
+        run: |
+          az login --service-principal -u "${{ secrets.AZURE_CLIENT_ID }}" -p "${{ secrets.AZURE_CLIENT_SECRET }}" --tenant "${{ secrets.AZURE_TENANT_ID }}" --output none
+
+      # - name: Convert environment to uppercase
+      #   run: echo "ENVIRONMENT=${{ matrix.stage }}" | awk '{print toupper($0)}' >> $GITHUB_ENV
+
+      - uses: azure/arm-deploy@v2
+        with:
+          resourceGroupName: cdny-test
+          template: ..infra/main.bicep
+          parameters: ./infra/main.${{matrix.stage}}.parameters.json  administratorLoginPassword=${{secrets.ADMINISTRATORLOGINPASSWORD }}
+          additionalArguments: "--what-if --rollback-on-error --what-if-exclude-change-types Create Ignore"     
+                         
+                         
+      # - name: Create Azure AD Groups
+      #   run: |
+      #                      chmod +x ./infra/create_aad_group.sh
+      #                      ./infra/create_aad_group.sh ${{ matrix.environment }}
+                            
+      #   env:
+      #             ENVIRONMENT: $ENVIRONMENT
+      #             SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      #             RESOURCE_GROUP: ${{ vars.RESOURCE_GROUP }}
+      #             ADLS_RESOURCE: ${{ vars.ADLS_RESOURCE }}
+      #             DATABRICKS_RESOURCE: ${{ vars.DATABRICKS_RESOURCE }}
+      #             DATAFACTORY_RESOURCE: ${{ vars.DATAFACTORY_RESOURCE }}
+      #             KEYVAULT_RESOURCE: ${{ vars.KEYVAULT_RESOURCE }}
+      #             SQLSERVER_RESOURCE: ${{ vars.SQLSERVER_RESOURCE }}
+
+                        

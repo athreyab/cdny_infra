@@ -1,0 +1,57 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "prefix": {
+      "value": "cdny"
+    },
+    "app": {
+      "value": "dwh"
+    },
+    "region": {
+      "value": "eus"
+    },
+    "environment": {
+      "value": "dev"
+    },
+    "PrivateDNSRG": {
+      "value": "cdny-dwh-eus-global-rg"
+    },
+    "PrivateDNSSub": {
+      "value": "85dad2f5-5ab0-45c2-ba19-d46ea748b457"
+    },
+    "managedDatabricksResourceGroupId": {
+      "value": "/subscriptions/cbd95f29-fad7-443a-8c4a-4afa332124d8/resourceGroups/databricks-rg-cdny-dwh-eus-dev-databricks01-vn4z4heclpk2c"
+    },
+    "newOrExistingPrivateDNS": {
+      "value": "existing"
+    },
+    "pricingTier": {
+      "value": "premium"
+    },
+    "disablePublicIp": {
+      "value": true
+    },
+    "vnetCidr": {
+      "value": "10.10.0.0/16"
+    },
+    "publicSubnetCidr": {
+      "value": "10.10.64.0/18"
+    },
+    "privateSubnetCidr": {
+      "value": "10.10.0.0/18"
+    },
+    "privateEndpointSubnetCidr": {
+      "value": "10.10.128.0/24"
+    },
+    "administratorLoginPassword": {
+      "value": ""
+    },
+    "kind": {
+      "value": "StorageV2"
+    },
+    "tenantResourceID": {
+      "value": "0a1c53e5-47b0-4dd4-b77c-2e3bbbd05b5f"
+    }
+      }
+}
