@@ -30,7 +30,7 @@ jobs:
       - uses: azure/arm-deploy@v2
         with:
           resourceGroupName: cdny-test
-          template: ..infra/main.bicep
+          template: ./infra/main.bicep
           parameters: ./infra/main.${{matrix.stage}}.parameters.json  administratorLoginPassword=${{secrets.ADMINISTRATORLOGINPASSWORD }}
           additionalArguments: "--what-if --rollback-on-error --what-if-exclude-change-types Create Ignore"     
                          
