@@ -658,7 +658,7 @@ module dataFactorylinkedservice 'databrickslinkedservice.bicep' = {
 
 
 
-module dataFactorylinkedserviceforsa 'datafactoryl;inkedserviceforsa.bicep' = {
+module dataFactorylinkedserviceforsa 'datafactory;linkedserviceforsa.bicep' = {
   name: 'databfactoryLinkedserviceDeploymentforSA'
   dependsOn: [dataFactory]
   params: {    
