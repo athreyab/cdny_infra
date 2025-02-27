@@ -417,14 +417,9 @@ module AppInsighhtsModule 'appinsight.bicep' = {
     WorkspaceResourceID: logAnalyticsWorkspaceModule.outputs.workspaceID
   }
 }
-module ActionGroupModule 'actiongroup.bicep' = {
-  name:'ActionGroupDeployment'
-  params: {
-
-  }
 
 
-}
+
 module nsgModule 'nsg.bicep' = {
   name: 'nsgDeployment'
   params: {
@@ -510,7 +505,7 @@ module KVneworexisting 'deploymentscriptneworexisting.bicep' = {
   }
  }
 */
-module keyVaultModule 'keuvault.bicep' = {
+module keyVaultModule 'keyvault.bicep' = {
   name: 'KeyVaultDeployment'
   params: {
     keyVaultName: keyVaultName
@@ -522,6 +517,7 @@ module keyVaultModule 'keuvault.bicep' = {
     privateSubnetId: vnetModule.outputs.privateSubnetId
   }
 }
+
 output Keyvaultname  string = keyVaultModule.outputs.keyVaultName
 output Keyvaultid string = keyVaultModule.outputs.keyVaultId
 
